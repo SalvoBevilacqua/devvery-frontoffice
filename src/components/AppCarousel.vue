@@ -8,7 +8,7 @@ export default {
 
   data() {
     return {
-      images: ['alta-cucina', 'cinese', 'fast-food', 'giapponese', 'hamburgheria', 'pasticceria', 'pizzeria', 'trattoria'],
+      images: ['alta-cucina', 'cinese', 'fast-food', 'giapponese', 'hamburgeria', 'pasticceria', 'pizzeria', 'trattoria'],
       settings: {
         itemsToShow: 0.7,
         snapAlign: 'center',
