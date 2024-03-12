@@ -4,8 +4,7 @@ export default {};
 
 <template>
   <div class="wrapper px-5">
-
-    <div class="container py-5">
+    <div class="container mt-5 py-5">
       <div class="d-flex flex-column gap-5">
         <div class="row row-cols-1 row-cols-md-2 justify-content-between align-items-center g-5">
           <div class="d-flex flex-column align-items-end">
@@ -21,12 +20,11 @@ export default {};
           <img class="object-fit-cover rounded rounded-5 p-0" src="../assets/images/main/borghese.jpg"
             alt="Foto Ristorante" />
           <div class="d-flex flex-column align-items-start">
-            <h3>Unisciti a noi e preparati a raggiungere il voto 10 in cucina!</h3>
-            <p class="text-start w-75">Raggiungi più clienti con Devvery.Gestiamo noi la consegna, così tu puoi
-              dedicarti
-              a
-              offrire i migliori
-              piatti e prodotti.</p>
+            <h3>Unisciti a noi e preparati a raggiungere il 10 in cucina!</h3>
+            <p class="text-start w-75">
+              Raggiungi più clienti con Devvery.Gestiamo noi la consegna, così tu puoi dedicarti a offrire i migliori
+              piatti e prodotti.
+            </p>
             <a href="http://127.0.0.1:8000/register" class="btn btn-dark">REGISTRATI</a>
           </div>
         </div>
@@ -39,22 +37,20 @@ export default {};
 .wrapper {
   position: relative;
   background-color: #f9b91f;
-  padding-top: 2rem;
 
-
-  // &::before {
-  //   width: 100%;
-  //   background-image: url(../assets/images/main/onda.png);
-  //   content: '';
-  //   height: 7rem;
-  //   position: absolute;
-  //   display: block;
-  //   z-index: 9;
-  //   top: -104px;
-  //   left: 0;
-  //   background-size: cover;
-  //   background-repeat: no-repeat;
-  // }
+  &::before {
+    width: 100%;
+    background-image: url(../assets/images/main/onda.png);
+    content: '';
+    height: 6rem;
+    position: absolute;
+    display: block;
+    z-index: 1;
+    top: -60px;
+    left: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
   &::after {
     width: 100%;
@@ -63,8 +59,8 @@ export default {};
     height: 6rem;
     position: absolute;
     display: block;
-    z-index: 99;
-    bottom: -62px;
+    z-index: 5;
+    bottom: -60px;
     left: 0;
     background-size: cover;
     background-repeat: no-repeat;

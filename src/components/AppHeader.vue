@@ -26,38 +26,39 @@ export default {
 </script>
 
 <template>
-  <header>
-    <nav class="navbar fixed-top bg-body-tertiary flex-nowrap">
+  <header class="d-flex justify-content-center mt-5">
+    <nav class="navbar bg-white w-75 border-0 rounded-5">
       <div class="container">
         <router-link class="navbar-brand" :to="{ name: 'home' }">
           <img src="../assets/images/main/logotipo.png" alt="" />
         </router-link>
 
-        <div v-if="$route.path != '/shipment'" class="d-flex gap-2 align-items-center">
-          <router-link class="btn d-none d-md-block fw-bold" to="/about-us">CHI SIAMO</router-link>
-          <a href="http://127.0.0.1:8000/admin" class="btn ms_btn-yellow d-block">LOGIN</a>
-          <button class="navbar-toggler border-black border-2 d-flex align-content-center gap-1 position-relative" type="button"
-            data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+        <div class="d-flex gap-3 ms_color-dark">
+          <router-link v-if="$route.path === '/shipment'" to="/" class="btn btn-warning fw-bold">
+            Torna indietro
+          </router-link>
+
+          <button v-if="$route.path !== '/shipment'" class="ms_button_cart navbar-toggler border-2 d-flex gap-1"
+            type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
             aria-label="Toggle navigation" @click="closeModal()">
 
-            <!-- <span v-if="store.cartData.length != 0" class="d-inline-block ms_color-dark fw-bold">{{ numberOfProducts }}</span> -->
-
-              <span v-if="store.cartData.length != 0" class="counter d-inline-block ms_color-dark fw-bold rounded-2 position-absolute top-0 start-100 translate-middle">{{ numberOfProducts }}</span>
+            <span v-if="store.cartData.length != 0" class="fw-bold ms_color-dark">
+              {{ numberOfProducts }}
+            </span>
 
             <i class="fa-solid fa-cart-shopping ms_color-dark"></i>
           </button>
         </div>
-
-        <router-link v-if="$route.path === '/shipment'" to="/" class="btn btn-warning fw-bold">Torna
-          indietro</router-link>
       </div>
     </nav>
   </header>
 
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-    <div class="offcanvas-header">
+    <div class="offcanvas-header d-flex justify-content-between align-items-center">
       <h2 class="offcanvas-title" id="offcanvasNavbarLabel">Il tuo carrello</h2>
-      <button type="button" class="btn-close ms_burger" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-circle-xmark text-white fs-3"></i>
+      </button>
     </div>
 
     <div class="offcanvas-body">
@@ -67,29 +68,33 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-template {
-  z-index: 9999;
-}
+@use "../styles/variables/variables.scss" as *;
 
 img {
-  height: 40px;
+  height: 2rem;
 }
 
-i {
-  font-size: 1.5rem;
-}
+.ms_button_cart {
+  border-color: $ms_dark;
 
-.counter {
-  background-color: #f9b91f;
-  padding: 0.2rem 0.4rem;
-}
+  &:hover {
+    border-color: white;
+    background-color: $ms_yellow;
+    color: white;
 
-button:hover {
-  background-color: rgba(199, 199, 199, 0.3);
+    i {
+      color: white;
+    }
+
+    .ms_color-dark {
+      color: white;
+    }
+  }
 }
 
 .offcanvas-header {
-  background-color: rgb(248, 249, 250);
+  background-color: $ms_dark;
+  color: white;
 }
 
 // CART SHADOW

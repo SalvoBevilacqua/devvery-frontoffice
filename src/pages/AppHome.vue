@@ -1,21 +1,19 @@
 <template>
   <div>
     <AppHeader />
-    <div class="ms-container">
-      <ProductList />
-      <AppSearch />
-      <AppCarousel />
-      <AppResults />
-      <AppOrderAndLogin />
-      <AppFooter />
-    </div>
+    <ProductList />
+    <AppSearch />
+    <AppResults v-if="store.restaurants[0]" />
+    <AppCarousel />
+    <AppOrderAndLogin />
+    <AppFooter />
   </div>
 </template>
 
 <script>
 import AppHeader from "../components/AppHeader.vue";
-import AppResults from "../components/AppResults.vue";
 import AppSearch from "../components/AppSearch.vue";
+import AppResults from "../components/AppResults.vue";
 import AppFooter from "../components/AppFooter.vue";
 import AppCarousel from "../components/AppCarousel.vue";
 import ProductList from "../components/ProductList.vue";
@@ -30,7 +28,7 @@ export default {
     AppFooter,
     AppCarousel,
     AppOrderAndLogin,
-    AppResults
+    AppResults,
   },
   data() {
     return {
@@ -45,7 +43,7 @@ export default {
   created() {
     this.store.restaurants = [];
     this.store.search = '';
-    this.store.loadingResults = true;
+    this.store.loading = true;
     this.store.checkedTypes = [];
   },
 };

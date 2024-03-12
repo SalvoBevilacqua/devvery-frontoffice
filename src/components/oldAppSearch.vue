@@ -1,17 +1,20 @@
 <script>
 import axios from "axios";
 import { store } from "../store";
-
 export default {
   data() {
     return {
       store,
+      myTypes: [],
     };
   },
   created() {
+    axios.get(`${this.store.baseUrl}/api/types`)
+      .then((resp) => {
+        this.myTypes = resp.data.result;
+      });
     axios.get(`${this.store.baseUrl}/api/types`).then((resp) => {
       this.store.myTypes = resp.data.result;
-      this.store.loading = false;
     });
   },
   methods: {
@@ -20,40 +23,54 @@ export default {
       this.store.search = "";
       this.store.checkedTypes = [];
       this.store.restaurants = [];
+
     },
     getImagepath(img) {
       return new URL(`../assets/images/type_in_search/${img}.jpg`, import.meta.url).href;
     },
     filteredRestaurants() {
-      this.store.loading = true;
-      this.store.checkedTypes = [];
-      this.store.restaurants = [];
-      axios.get(`${this.store.baseUrl}/api/restaurants/searchText/${this.store.search}`)
-        .then((resp) => {
-          this.store.restaurants = resp.data.result;
-        })
-        .finally(() => {
-          this.store.loading = false
-        });
+      if (this.store.search.length >= 2) {
+        this.store.loadingResults = true;
+        this.store.checkedTypes = [];
+        if (this.store.search.length === 0) {
+          this.store.restaurants = [];
+        } else {
+          axios
+            .get(`${this.store.baseUrl}/api/restaurants/searchText/${this.store.search}`)
+            .then((resp) => {
+              this.store.restaurants = resp.data.result;
+            })
+            .finally(() => {
+              this.store.loadingResults = false
+            });
+        }
+      } else {
+        this.store.restaurants = [];
+        this.store.loadingResults = true
+      }
     },
     checkTypes() {
-      this.store.loading = true;
+      this.store.loadingResults = true;
       this.store.restaurants = [];
 
       if (this.store.checkedTypes.length > 0) {
-        let data = [];
+
+        let dates = [];
         this.store.checkedTypes.forEach((element) => {
-          data.push(element.name);
+          dates.push(element.name);
         });
-        const params = { types: data };
-        axios.get(`${this.store.baseUrl}/api/restaurants/types`, { params })
+        const params = { types: dates };
+        axios
+          .get(`${this.store.baseUrl}/api/restaurants/types`, { params })
           .then((resp) => {
             if (!(typeof resp.data.result === 'string')) {
               this.store.restaurants = resp.data.result;
+              // console.log(this.store.restaurants);
             }
           })
           .finally(() => {
-            this.store.loading = false
+            this.store.loadingResults = false
+
           })
       }
     },
@@ -64,22 +81,22 @@ export default {
 <template>
   <div class="container">
     <div id="title" class="text-center">
-      <p class="fw-semibold">Il cibo che vuoi, quando vuoi...</p>
+      <p class="fw-semibold mt-4">Il cibo che vuoi, quando vuoi...</p>
     </div>
     <div class="d-flex justify-content-center mt-5" v-if="store.checkedTypes.length === 0">
       <div class="input-group w-75 ms_width">
-        <label class="input-group-text text-warning rounded-4 rounded-end-0" id="basic-addon1" for="search">
+        <label class="input-group-text text-warning rounded-3 rounded-end-0" id="basic-addon1" for="search">
           <i class="fa-solid fa-magnifying-glass"></i>
         </label>
-        <input type="text" class="form-control bg-white rounded-4 rounded-start-0" placeholder="Cerca un Ristorante"
+        <input type="text" class="form-control bg-white rounded-3 rounded-start-0" placeholder="Cerca un Ristorante"
           aria-label="search" aria-describedby="basic-addon1" id="search" v-model="store.search"
           @input="filteredRestaurants">
       </div>
     </div>
 
-    <div class="row row-cols-2 row-cols-md-4 justify-content-between mt-4"
+    <div class="row row-cols-2 row-cols-md-4 justify-content-between mt-3"
       :class="{ 'ms_margin_top': store.checkedTypes.length != 0 }" v-if="store.search.length === 0">
-      <div v-for="myType in store.myTypes" class="checkbox-wrapper-10 position-relative ms_margin">
+      <div v-for="myType in myTypes" class="checkbox-wrapper-10 position-relative ms_margin">
         <input v-bind:disabled="store.search.length > 0" v-model="store.checkedTypes" @change="checkTypes"
           :value="myType" class="tgl tgl-flip z-2" :id="`cb5-${myType.name}`" type="checkbox" />
         <label class="tgl-btn fs-5 z-2" :data-tg-off="myType.name" :data-tg-on="myType.name"
@@ -89,12 +106,10 @@ export default {
           :src="getImagepath(myType.name)" :alt="myType.name" />
       </div>
     </div>
-
     <div class="text-center" v-if="store.search != '' || store.checkedTypes.length > 0">
-      <button type="button" class="btn fs-5 mt-5 fw-bold ms_reset_filter" @click="resetFilter()">
-        Azzera ricerca
-      </button>
+      <button type="button" class="btn fs-5 mt-5 fw-bold ms_reset_filter" @click="resetFilter()">Azzera ricerca</button>
     </div>
+
   </div>
 </template>
 
@@ -103,6 +118,14 @@ export default {
 
 .checkbox-wrapper-10 img {
   cursor: pointer;
+}
+
+.ms_margin_top {
+  margin-top: 0;
+}
+
+.ms_padding_top {
+  padding-top: 0;
 }
 
 .container {
@@ -130,20 +153,8 @@ export default {
     aspect-ratio: 1;
   }
 
-  .hover-zoom {
-    transition: all .3s ease-in-out;
-    z-index: 1;
-    padding: 1rem 1rem 0 1rem;
-
-    img {
-      border-radius: 20px 20px 0 0px;
-    }
-
-    &:hover {
-      z-index: 2;
-      transform: scale(1.05);
-      transition: all .3s ease-in-out;
-    }
+  .ms_brand {
+    white-space: nowrap;
   }
 
   // SEARCHBAR SHADOW
