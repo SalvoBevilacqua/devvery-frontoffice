@@ -12,28 +12,35 @@ export default {
 <template>
   <div class="py-5 bg-white position-relative">
     <div class="container ms_wave">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mb-5">
 
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 mb-5 container ms_wave">
-        <router-link class="col g-4 d-flex justify-content-center" v-for="restaurant in this.store.restaurants"
+        <router-link class="col ms_card" v-for="restaurant in this.store.restaurants"
           :to="{ name: 'show', params: { slug: restaurant.slug } }">
-          <div class="card py-3 hover-zoom rounded-5 border-2 w-100 ms_bg-dark text-white position-relative">
+
+          <div class="mb-4 position-relative">
             <!-- IMMAGINE -->
-            <img v-if="restaurant.cover_image" class="card-img-top object-fit-cover h-50"
-              :src="`${this.store.baseUrl}/storage/${restaurant.cover_image}`" alt="immagine ristorante" />
-            <img v-else class="card-img-top object-fit-cover h-50" src="../assets/images/noimg.png"
-              alt="nessuna_immagine" />
+            <div>
+              <div class="ms_front">
+                <img v-if="restaurant.cover_image" class="w-100 rounded-4 object-fit-cover"
+                  :src="`${this.store.baseUrl}/storage/${restaurant.cover_image}`" alt="immagine ristorante" />
+                <img v-else class="object-fit-cover" src="../assets/images/noimg.png" alt="nessuna_immagine" />
+              </div>
+
+              <div class="ms_back position-absolute w-100 rounded-4 p-3">
+                <p class="fw-bold w-75">{{ restaurant.description }}</p>
+              </div>
+            </div>
+
             <!-- BADGE -->
-            <div class="mt-3 px-1 d-flex flex-wrap gap-1">
-              <span class="border border-2 rounded-2 px-1 border-0 ms_bg-yellow ms_color-dark fw-bold"
+            <div class="d-flex flex-wrap gap-1 my-2">
+              <span class="border rounded-2 px-1 border-0 ms_bg-yellow ms_color-dark fw-bold"
                 v-for="tipo in restaurant.types">
                 {{ tipo.name }}
               </span>
             </div>
+
             <!-- INFO RISTORANTE -->
-            <div class="card-body h-50">
-              <h3 class="card-title text-wrap">{{ restaurant.name }}</h3>
-              <p class="card-text">{{ restaurant.description }}</p>
-            </div>
+            <h3 class="text-wrap text-black">{{ restaurant.name }}</h3>
           </div>
 
         </router-link>
@@ -64,19 +71,34 @@ export default {
     background-repeat: no-repeat;
   }
 
-  .hover-zoom {
-    transition: all .3s ease-in-out;
-    z-index: 1;
-    padding: 1rem 1rem 0 1rem;
-
-    &:hover {
-      z-index: 2;
-      transform: scale(1.05);
-      transition: all .3s ease-in-out;
+  .ms_card {
+    img {
+      aspect-ratio: 2;
     }
 
-    img {
-      border-radius: 20px 20px 0 0px;
+    .ms_front,
+    .ms_back {
+      backface-visibility: hidden;
+      transition: transform 0.9s ease;
+    }
+
+    .ms_back {
+      top: 0%;
+      left: 0%;
+      transform: rotateY(180deg);
+      background-color: $ms_yellow;
+      color: white;
+      aspect-ratio: 2;
+    }
+
+    &:hover {
+      .ms_front {
+        transform: rotateY(-180deg);
+      }
+
+      .ms_back {
+        transform: rotateY(0deg);
+      }
     }
   }
 }
