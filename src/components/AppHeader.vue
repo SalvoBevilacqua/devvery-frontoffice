@@ -27,7 +27,7 @@ export default {
 
 <template>
   <header class="d-flex justify-content-center mt-5">
-    <nav class="navbar bg-white w-75 border-0 rounded-5">
+    <nav class="navbar bg-white w-75 rounded-5">
       <div class="container">
         <router-link class="navbar-brand" :to="{ name: 'home' }">
           <img src="../assets/images/main/logotipo.png" alt="" />

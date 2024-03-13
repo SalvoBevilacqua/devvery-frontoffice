@@ -19,16 +19,18 @@ export default {
       return new URL(`../assets/images/type_in_search/${img}.jpg`, import.meta.url).href;
     },
     filteredRestaurants() {
-      this.store.loading = true;
       this.store.checkedTypes = [];
       this.store.restaurants = [];
-      axios.get(`${this.store.baseUrl}/api/restaurants/searchText/${this.store.search}`)
-        .then((resp) => {
-          this.store.restaurants = resp.data.result;
-        })
-        .finally(() => {
-          this.store.loading = false;
-        });
+      if (this.store.search !== "") {
+        this.store.loading = true;
+        axios.get(`${this.store.baseUrl}/api/restaurants/searchText/${this.store.search}`)
+          .then((resp) => {
+            this.store.restaurants = resp.data.result;
+          })
+          .finally(() => {
+            this.store.loading = false;
+          });
+      }
     },
     checkTypes() {
       this.store.loading = true;
