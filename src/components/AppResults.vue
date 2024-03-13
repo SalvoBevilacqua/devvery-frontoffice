@@ -6,14 +6,30 @@ export default {
       store,
     };
   },
+  methods: {
+    resetFilter() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      this.store.search = "";
+      this.store.checkedTypes = [];
+      this.store.restaurants = [];
+    }
+  },
 };
 </script>
 
 <template>
-  <div class="py-5 bg-white position-relative">
+  <div class="py-5 bg-white position-relative" id="result">
     <div class="container ms_wave">
-      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mb-5">
 
+      <div class="mb-4 d-flex align-items-baseline justify-content-between gap-2">
+        <p class="fs-5 fw-bold" v-if="store.restaurants.length === 1">Abbiamo trovato 1 ristorante</p>
+        <p class="fs-5 fw-bold" v-else>Abbiamo trovato {{ store.restaurants.length }} ristoranti</p>
+        <button type="button" class="btn fs-5 fw-bold rounded-3 ms_reset_filter" @click="resetFilter()">
+          Azzera ricerca
+        </button>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mb-5">
         <router-link class="col ms_card" v-for="restaurant in this.store.restaurants"
           :to="{ name: 'show', params: { slug: restaurant.slug } }">
 
@@ -42,7 +58,6 @@ export default {
             <!-- INFO RISTORANTE -->
             <h3 class="text-wrap text-black">{{ restaurant.name }}</h3>
           </div>
-
         </router-link>
       </div>
     </div>
@@ -69,6 +84,11 @@ export default {
     left: 0;
     background-size: cover;
     background-repeat: no-repeat;
+  }
+
+  .ms_reset_filter {
+    background-color: $ms_yellow;
+    color: $ms_dark;
   }
 
   .ms_card {

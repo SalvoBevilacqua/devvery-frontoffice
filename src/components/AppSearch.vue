@@ -15,12 +15,6 @@ export default {
     });
   },
   methods: {
-    resetFilter() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      this.store.search = "";
-      this.store.checkedTypes = [];
-      this.store.restaurants = [];
-    },
     getImagepath(img) {
       return new URL(`../assets/images/type_in_search/${img}.jpg`, import.meta.url).href;
     },
@@ -33,7 +27,7 @@ export default {
           this.store.restaurants = resp.data.result;
         })
         .finally(() => {
-          this.store.loading = false
+          this.store.loading = false;
         });
     },
     checkTypes() {
@@ -53,10 +47,24 @@ export default {
             }
           })
           .finally(() => {
-            this.store.loading = false
+            this.store.loading = false;
+            this.scrollToResult();
           })
       }
     },
+    scrollToResult() {
+      const resultElement = document.getElementById("result");
+
+      if (resultElement) {
+        // Calcola la posizione dell'elemento rispetto al top della pagina
+        const offsetTop = resultElement.offsetTop;
+
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        });
+      }
+    }
   },
 };
 </script>
@@ -73,7 +81,7 @@ export default {
         </label>
         <input type="text" class="form-control bg-white rounded-4 rounded-start-0" placeholder="Cerca un Ristorante"
           aria-label="search" aria-describedby="basic-addon1" id="search" v-model="store.search"
-          @input="filteredRestaurants">
+          @input="filteredRestaurants" @keydown.enter.prevent="scrollToResult">
       </div>
     </div>
 
@@ -90,11 +98,6 @@ export default {
       </div>
     </div>
 
-    <div class="text-center" v-if="store.search != '' || store.checkedTypes.length > 0">
-      <button type="button" class="btn fs-5 mt-5 fw-bold ms_reset_filter" @click="resetFilter()">
-        Azzera ricerca
-      </button>
-    </div>
   </div>
 </template>
 
@@ -108,12 +111,6 @@ export default {
 .container {
   padding-top: 5rem;
   padding-bottom: 6rem;
-
-  .ms_reset_filter {
-    background-color: $ms_yellow;
-    color: $ms_dark;
-    border-radius: 10px;
-  }
 
   #title {
     font-size: 3rem;

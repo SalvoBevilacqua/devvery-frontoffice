@@ -64,7 +64,7 @@ export default {
 
 @media screen and (min-width: 768px) {
   .carousel__item {
-    height: 1000px;
+    height: 900px;
   }
 }
 </style>
