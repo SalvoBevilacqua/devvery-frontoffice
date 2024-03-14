@@ -27,7 +27,7 @@ export default {
 
 <template>
   <header class="d-flex justify-content-center mt-5">
-    <nav class="navbar bg-white w-75 rounded-5">
+    <nav class="navbar bg-white w-75 rounded-5" :class="$route.path !== '/' ? 'border ms_border-color border-2' : ''">
       <div class="container">
         <router-link class="navbar-brand" :to="{ name: 'home' }">
           <img src="../assets/images/main/logotipo.png" alt="" />
@@ -69,6 +69,10 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/variables/variables.scss" as *;
+
+.ms_border-color {
+  border-color: $ms_dark !important;
+}
 
 img {
   height: 2rem;

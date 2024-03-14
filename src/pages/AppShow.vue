@@ -63,7 +63,6 @@ export default {
 
       localStorage.setItem("cartData", JSON.stringify(this.store.cartData));
     },
-
     close() {
       this.store.showError = false;
     }
@@ -97,7 +96,7 @@ export default {
 
       <!-- MENU -->
       <div class="row row-cols-1 row-cols-sm-2">
-        <!-- CARD RISTORANTE -->
+        <!-- CARD -->
         <div v-for="food in store.foodsFound" class="col mb-3 hover-zoom">
           <div class="card position-relative h-100 border-0 rounded-4 bg-light">
             <div class="row g-0 h-100">
@@ -173,6 +172,10 @@ export default {
     font-weight: bold;
     border-top-right-radius: 0 !important;
     border-bottom-left-radius: 0 !important;
+
+    &:hover {
+      background-color: $ms_dark;
+    }
   }
 
   .hover-zoom {

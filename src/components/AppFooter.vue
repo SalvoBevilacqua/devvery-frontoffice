@@ -70,19 +70,6 @@ footer {
     z-index: 4;
     padding-top: 5rem !important;
 
-    // .col {
-    //     &:nth-child(3) {
-    //         text-align: end;
-    //     }
-    //     &:nth-child(2) {
-    //         text-align: center;
-    //     }
-    // }
-
-    
-
-
-
     .z_index {
         z-index: 3;
     }
