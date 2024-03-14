@@ -75,13 +75,13 @@ export default {
   <AppHeader />
 
   <div v-if="!store.menuEmpty">
-    <div class="container my-4">
+    <div class="container my-5">
       <!-- INFO RISTORANTE -->
-      <div class="ms_restaurant d-flex justify-content-center gap-3 mb-4">
+      <div class="ms_restaurant d-flex justify-content-center gap-3 mb-5 align-items-center">
         <!-- IMMAGINE -->
         <img v-if="store.foodsFound[0].restaurant.cover_image"
-          :src="`${store.baseUrl}/storage/${store.foodsFound[0].restaurant.cover_image}`" class="h-100 rounded-4"
-          alt="Immagine del ristorante">
+          :src="`${store.baseUrl}/storage/${store.foodsFound[0].restaurant.cover_image}`"
+          class="h-100 rounded-4 object-fit-cover" alt="Immagine del ristorante">
         <img v-else class="h-100 rounded-4" src="../assets/images/noimg.png" alt="immagine non trovata">
         <!-- INFO -->
         <div class="ms_restaurant-info">
@@ -96,27 +96,35 @@ export default {
       </div>
 
       <!-- MENU -->
-      <!-- AGGIUNGERE PER CELIACI E VEGANI -->
       <div class="row row-cols-1 row-cols-sm-2">
         <!-- CARD RISTORANTE -->
-        <div v-for="food in store.foodsFound" class="col">
-          <div class="card hover-zoom border-0 ms_bg-dark h-100 rounded-4">
-            <!-- IMMAGINE -->
-            <img v-if="food.cover_image" :src="`http://127.0.0.1:8000/storage/${food.cover_image}`"
-              class="h-100 object-fit-cover" :alt="`Immagine di ${food.name}`">
-            <img v-else src="../assets/images/noimg.png" class="h-100 object-fit-cover" alt="immagine non trovata">
-            <!-- BODY -->
-            <div>
-              <h5 class="card-title text-light">{{ food.name }}</h5>
-              <p class="card-text ms_description text-light">{{ food.description }}</p>
-              <p class="card-text text-light">{{ food.price }} €</p>
+        <div v-for="food in store.foodsFound" class="col mb-3 hover-zoom">
+          <div class="card position-relative h-100 border-0 rounded-4 bg-light">
+            <div class="row g-0 h-100">
+              <div class="col-md-4">
+                <img v-if="food.cover_image" :src="`${store.baseUrl}/storage/${food.cover_image}`"
+                  class="img-fluid rounded-start-4 h-100 object-fit-cover" :alt="food.name">
+                <img v-else src="../assets/images/noimg.png" class="img-fluid rounded-start" alt="immagine non trovata">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{ food.name }}</h5>
+                  <p class="card-text">{{ food.description }}</p>
+                  <p class="card-text">{{ food.price }} €</p>
+                  <p class="card-text">
+                    <small v-if="food.celiac === 1 && food.vegan === 0" class="text-body-secondary">Gluten Free</small>
+                    <small v-if="food.vegan === 1 && food.celiac === 0" class="text-body-secondary">Vegano</small>
+                    <small v-if="food.vegan === 1 && food.celiac === 1" class="text-body-secondary">Gluten Free e
+                      Vegano</small>
+                  </p>
+                </div>
+              </div>
             </div>
             <!-- BOTTONI -->
-            <div>
-              <button @click="addtoCart(food)" class="btn ms_btn-yellow position-absolute bottom-0 end-0">
-                <i class="fa-solid fa-plus"></i>
-              </button>
-            </div>
+            <button @click="addtoCart(food)"
+              class="btn position-absolute bottom-0 end-0 border-0 rounded-4 ms_btn-yellow">
+              <i class="fa-solid fa-plus"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -161,17 +169,17 @@ export default {
   }
 
   .ms_btn-yellow {
-    border-radius: 6px 0 6px 0;
     padding: 0.7rem;
     font-weight: bold;
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
   }
 
   .hover-zoom {
     transition: all 0.3s ease-in-out;
-    z-index: 1;
 
     &:hover {
-      z-index: 2;
+      z-index: 1;
       transform: scale(1.05);
       transition: all 0.3s ease-in-out;
     }
