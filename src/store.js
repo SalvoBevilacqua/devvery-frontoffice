@@ -10,7 +10,10 @@ export const store = reactive({
   search: "",
   cartData: getCart(),
   checkedTypes: [],
-  loading: true
+  loading: true,
+  foodsFound: [],
+  menuEmpty: true,
+  nameOfProductSelected: "",
 });
 
 function getCart() {
