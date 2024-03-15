@@ -51,8 +51,9 @@ export default {
   <div class="wrapper">
     <div v-if="store.cartData.length > 0">
       <div class="text-center mt-3">
-        <p class="d-inline-block text-center rounded-2 fw-bold p-2 ms_restaurant_name">Stai ordinando da {{
-      store.cartData[0].restaurant_name }}</p>
+        <p class="d-inline-block text-center rounded-2 fw-bold p-2 ms_restaurant_name">
+          Stai ordinando da {{ store.cartData[0].restaurant_name }}
+        </p>
       </div>
 
       <ul class="list-group mt-3">
@@ -62,8 +63,9 @@ export default {
               <span class="d-inline-block mb-1 text-capitalize">{{ item.name }}</span> - <span>{{ item.price
                 }}€</span><br>
 
-              <button class="btn ms_btn-yellow fw-bold" @click="decrease(item.id)"><i
-                  class="fa-solid fa-minus"></i></button>
+              <button class="btn ms_btn-yellow fw-bold" @click="decrease(item.id)">
+                <i class="fa-solid fa-minus"></i>
+              </button>
               <span class="d-inline-block mx-2">{{ item.quantity }}</span>
               <button class="btn ms_btn-yellow fw-bold" @click="add(item.id)"><i class="fa-solid fa-plus"></i></button>
             </div>

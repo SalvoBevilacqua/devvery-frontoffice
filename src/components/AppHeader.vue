@@ -27,19 +27,21 @@ export default {
 
 <template>
   <header class="d-flex justify-content-center mt-5">
-    <nav class="navbar bg-white w-75 rounded-5" :class="$route.path !== '/' ? 'border ms_border-color border-2' : ''">
+    <nav class="navbar bg-white w-75 rounded-5 border border-2 border-white"
+      :class="$route.path !== '/' ? 'ms_border-color' : ''">
       <div class="container">
         <router-link class="navbar-brand" :to="{ name: 'home' }">
           <img src="../assets/images/main/logotipo.png" alt="" />
         </router-link>
 
         <div class="d-flex gap-3 ms_color-dark">
-          <router-link v-if="$route.path === '/shipment'" to="/" class="btn btn-warning fw-bold">
+          <router-link v-if="$route.path !== '/'" to="/" class="btn btn-warning fw-bold">
             Torna indietro
           </router-link>
 
-          <button v-if="$route.path !== '/shipment'" class="ms_button_cart navbar-toggler border-2 d-flex gap-1"
-            type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+          <button v-if="$route.path !== '/shipment'"
+            class="ms_button_cart navbar-toggler border-2 d-flex gap-1 align-items-center" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
             aria-label="Toggle navigation" @click="closeModal()">
 
             <span v-if="store.cartData.length != 0" class="fw-bold ms_color-dark">
