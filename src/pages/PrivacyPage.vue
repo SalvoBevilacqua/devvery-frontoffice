@@ -13,8 +13,8 @@ export default {
     };
   },
   created() {
-        window.scrollTo({ top: 0});
-    },
+    window.scrollTo({ top: 0 });
+  },
   methods: {
     showSection(section) {
       this.activeSection = section;
@@ -25,13 +25,10 @@ export default {
 
 
 <template>
-  <div class="wrapper">
-    <AppHeader />
-    <div class="position-relative">
-
-    <div class="ms-container container mt-5 mb-5">
-      <div class="ms_wave"></div>
-      <h2>Informativa Sulla Privacy</h2>
+  <AppHeader />
+  <div class="position-relative">
+    <div class="container mt-5 mb-5 ms_wave">
+      <h2 class="mb-3">Informativa Sulla Privacy</h2>
       <div class="row">
         <div class="col-md-4 mb-3">
           <div class="card">
@@ -56,16 +53,12 @@ export default {
                     Sicurezza</a></li>
                 <li class="list-group-item"><a href="#" class="card-link" @click="showSection('rightSection')">7. I Tuoi
                     Diritti</a></li>
-
               </ul>
             </div>
           </div>
         </div>
         <div class="col-md-8">
           <div class="card">
-            <div class="card-header">
-              <h5 class="mb-0">Contenuto</h5>
-            </div>
             <div class="card-body">
               <div id="mainSection" class="section-content" :class="{ 'd-none': activeSection !== 'mainSection' }">
 
@@ -228,32 +221,24 @@ export default {
       </div>
     </div>
 
-    </div>
-    <AppFooter />
   </div>
+  <AppFooter />
 </template>
 
 <style lang="scss" scoped>
 @use "../styles/variables/variables.scss" as *;
-
-.wrapper {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 
 .ms_wave {
   &::after {
     width: 100%;
     background-image: url(../assets/images/main/onda_white.png);
     content: '';
-    height: 80px;
+    height: 6rem;
     position: absolute;
     display: block;
     transform: rotate(180deg);
     z-index: 9;
-    bottom: -80px;
+    bottom: -100px;
     left: 0%;
     background-size: cover;
     background-repeat: no-repeat;

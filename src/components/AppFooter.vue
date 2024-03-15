@@ -35,12 +35,10 @@ export default {
 </script>
 
 <template>
-    <footer class="position-relative p-5 pb-1 bg-dark ">
-        <div class=" my-5 container py-3 px-0">
-            <div class=" text-white position-relative z_index ">
+    <footer class="position-relative p-5 pb-1 bg-dark">
+        <div class="container my-5 py-3 px-0">
+            <div class="text-white z-3 position-relative">
                 <div class="d-flex justify-content-between flex-column flex-md-row">
-
-
                     <div class="mb-4" v-for="(item, index) in footerItems" :key="index">
                         <h2>{{ item.title }}</h2>
                         <div class="mb-2" v-for="(link, linkIndex) in item.links" :key="linkIndex">
@@ -69,10 +67,6 @@ footer {
     background-size: contain;
     z-index: 4;
     padding-top: 5rem !important;
-
-    .z_index {
-        z-index: 3;
-    }
 
     i {
         width: 1.5rem;

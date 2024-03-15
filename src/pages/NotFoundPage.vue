@@ -20,46 +20,35 @@ export default {
 };
 </script>
 
-
 <template>
-    <div class="wrapper">
-        <AppHeader />
+    <AppHeader />
 
-        <div class="ms_container container  d-flex">
-            <div class="row">
-                <div class="col d-flex flex-column align-items-center">
-                    <img src="../assets/images/404/404-img2.png" alt="">
-                    <router-link to="/" class="btn btn-success mb-4">Torna alla Home</router-link>
-                </div>
-                <div class="col d-none d-md-block d-lg-block "><img src="../assets/images/404/404-img.png" alt=""></div>
-            </div>
-
+    <div class="position-relative">
+        <div class="container text-center mt-5">
+            <img src="../assets/images/404/404-img.png" alt="">
         </div>
-        <AppFooter />
+        <div class="ms_wave"></div>
     </div>
+
+    <AppFooter />
 </template>
 
-
 <style lang="scss" scoped>
-img {
-    height: 100%;
-}
+.ms_wave {
 
-.btn {
-    width: 10rem;
-
-}
-
-.wrapper {
-    background-color: #f9b91f;
-    overflow: hidden;
-
-}
-
-.ms_container {
-    position: relative;
-    margin-top: 4rem;
-    min-height: 100%;
-    padding-top: 7rem;
+    &::after {
+        width: 100%;
+        background-image: url(../assets/images/main/onda_white.png);
+        content: '';
+        height: 6rem;
+        position: absolute;
+        display: block;
+        z-index: 9;
+        bottom: -70px;
+        left: 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        transform: rotateX(180deg);
+    }
 }
 </style>

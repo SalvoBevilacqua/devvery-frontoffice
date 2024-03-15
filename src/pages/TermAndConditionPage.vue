@@ -8,19 +8,16 @@ export default {
         AppFooter,
     },
     created() {
-        window.scrollTo({ top: 0});
+        window.scrollTo({ top: 0 });
     }
 };
 </script>
 
 
 <template>
-    <div class="wrapper pt-5">
-        <AppHeader />
-        <div class="position-relative">
-
-            <div class="ms-container container mt-5 mb-5">
-            <div class="ms_wave"></div>
+    <AppHeader />
+    <div class="position-relative">
+        <div class="container mt-5 mb-5 ms_wave">
             <h2>Termini e Condizioni</h2>
             <p>Benvenuto su Devvery, un'applicazione sviluppata da Devvery Inc. Leggi attentamente questi Termini e
                 Condizioni d'Uso ("Termini") prima di utilizzare l'applicazione.</p>
@@ -98,34 +95,28 @@ export default {
                 condizioni
                 sopra descritti. Se l'utente non accetta uno qualsiasi di questi termini, è pregato di non utilizzare
                 l'applicazione.</p>
-            </div>
         </div>
-        <AppFooter />
-
     </div>
+    <AppFooter />
 </template>
 
 <style lang="scss" scoped>
 @use "../styles/variables/variables.scss" as *;
 
-.wrapper {
-    height: 100vh;
-}
-
 .ms_wave {
-  &::after {
-    width: 100%;
-    background-image: url(../assets/images/main/onda_white.png);
-    content: '';
-    height: 80px;
-    position: absolute;
-    display: block;
-    transform: rotate(180deg);
-    z-index: 9;
-    bottom: -120px;
-    left: 0%;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
+    &::after {
+        width: 100%;
+        background-image: url(../assets/images/main/onda_white.png);
+        content: '';
+        height: 6rem;
+        position: absolute;
+        display: block;
+        transform: rotate(180deg);
+        z-index: 9;
+        bottom: -120px;
+        left: 0%;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
 }
 </style>
