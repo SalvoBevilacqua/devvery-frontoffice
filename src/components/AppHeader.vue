@@ -26,45 +26,47 @@ export default {
 </script>
 
 <template>
-  <header class="d-flex justify-content-center mt-5">
-    <nav class="navbar bg-white w-75 rounded-5 border border-2 border-white"
-      :class="$route.path !== '/' ? 'ms_border-color' : ''">
-      <div class="container">
-        <router-link class="navbar-brand" :to="{ name: 'home' }">
-          <img src="../assets/images/main/logotipo.png" alt="" />
-        </router-link>
-
-        <div class="d-flex gap-3 ms_color-dark">
-          <router-link v-if="$route.path !== '/'" to="/" class="btn btn-warning fw-bold ms_go-back">
-            Torna indietro
+  <div class="container">
+    <header class="d-flex justify-content-center mt-5">
+      <nav class="navbar bg-white rounded-5 border border-2 border-white w-100 px-2"
+        :class="$route.path !== '/' ? 'ms_border-color' : ''">
+        <div class="container">
+          <router-link class="navbar-brand" :to="{ name: 'home' }">
+            <img src="../assets/images/main/logotipo.png" alt="" />
           </router-link>
 
-          <button v-if="$route.path !== '/shipment'"
-            class="ms_button_cart navbar-toggler border-2 d-flex gap-1 align-items-center" type="button"
-            data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
-            aria-label="Toggle navigation" @click="closeModal()">
+          <div class="d-flex gap-3 ms_color-dark">
+            <router-link v-if="$route.path !== '/'" to="/" class="btn btn-warning fw-bold ms_go-back">
+              Torna indietro
+            </router-link>
 
-            <span v-if="store.cartData.length != 0" class="fw-bold ms_color-dark">
-              {{ numberOfProducts }}
-            </span>
+            <button v-if="$route.path !== '/shipment'"
+              class="ms_button_cart navbar-toggler border-2 d-flex gap-1 align-items-center" type="button"
+              data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+              aria-label="Toggle navigation" @click="closeModal()">
 
-            <i class="fa-solid fa-cart-shopping ms_color-dark"></i>
-          </button>
+              <span v-if="store.cartData.length != 0" class="fw-bold ms_color-dark">
+                {{ numberOfProducts }}
+              </span>
+
+              <i class="fa-solid fa-cart-shopping ms_color-dark"></i>
+            </button>
+          </div>
         </div>
+      </nav>
+    </header>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header d-flex justify-content-between align-items-center">
+        <h2 class="offcanvas-title" id="offcanvasNavbarLabel">Il tuo carrello</h2>
+        <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
+          <i class="fa-solid fa-circle-xmark text-white fs-3"></i>
+        </button>
       </div>
-    </nav>
-  </header>
 
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-    <div class="offcanvas-header d-flex justify-content-between align-items-center">
-      <h2 class="offcanvas-title" id="offcanvasNavbarLabel">Il tuo carrello</h2>
-      <button type="button" class="btn" data-bs-dismiss="offcanvas" aria-label="Close">
-        <i class="fa-solid fa-circle-xmark text-white fs-3"></i>
-      </button>
-    </div>
-
-    <div class="offcanvas-body">
-      <AppCart />
+      <div class="offcanvas-body">
+        <AppCart />
+      </div>
     </div>
   </div>
 </template>
