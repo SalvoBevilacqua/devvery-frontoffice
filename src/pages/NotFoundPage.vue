@@ -44,7 +44,7 @@ export default {
         position: absolute;
         display: block;
         z-index: 9;
-        bottom: -70px;
+        bottom: -6rem;
         left: 0;
         background-size: cover;
         background-repeat: no-repeat;

@@ -80,7 +80,7 @@ export default {
     position: absolute;
     display: block;
     z-index: 1;
-    top: -60px;
+    top: -4rem;
     left: 0;
     background-size: cover;
     background-repeat: no-repeat;

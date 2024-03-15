@@ -181,9 +181,9 @@ export default {
 </script>
 
 <template>
-  <div class="overflow-y-auto">
+  <div class="overflow-y-auto wrapper">
     <AppHeader />
-    <div class="wrapper position-relative">
+    <div class="position-relative">
       <div class="ms-container container my-5">
         <h3 class="mb-4">Dettagli di consegna</h3>
         <div class="row mb-5 ms_wave">
@@ -263,10 +263,10 @@ export default {
           </div>
           <div v-else class="col-lg-8 col-md-12">
             <div v-if="!loading" class="card fs-5">
-              <div class="card-header">
+              <div class="card-header fw-bold">
                 Dettagli Cliente
               </div>
-              <div class="card-body d-flex justify-content-around flex-column flex-md-row">
+              <div class="card-body d-flex flex-column flex-md-row gap-4">
                 <div>
                   <p><span class="fw-bold">Nome:</span> {{ first_name }}</p>
                   <p><span class="fw-bold">Cognome:</span> {{ last_name }}</p>
@@ -299,26 +299,27 @@ export default {
 <style lang="scss" scoped>
 @use "../styles/variables/variables.scss" as *;
 
-.ms_wave {
-  &::after {
-    width: 100%;
-    background-image: url(../assets/images/main/onda_white.png);
-    content: '';
-    height: 80px;
-    position: absolute;
-    display: block;
-    transform: rotate(180deg);
-    z-index: 9;
-    bottom: -74px;
-    left: 0%;
-    background-size: cover;
-    background-repeat: no-repeat;
+.wrapper {
+  min-height: 100vh;
+
+  .ms_wave {
+    &::after {
+      width: 100%;
+      background-image: url(../assets/images/main/onda_white.png);
+      content: '';
+      height: 6rem;
+      position: absolute;
+      display: block;
+      transform: rotate(180deg);
+      z-index: 9;
+      bottom: -6rem;
+      left: 0%;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
   }
 }
 
-.wrapper {
-  min-height: 70vh;
-}
 
 .ex-10-icon {
   color: rgb(71, 71, 71);

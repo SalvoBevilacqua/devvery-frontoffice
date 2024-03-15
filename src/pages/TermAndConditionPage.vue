@@ -113,7 +113,7 @@ export default {
         display: block;
         transform: rotate(180deg);
         z-index: 9;
-        bottom: -120px;
+        bottom: -6rem;
         left: 0%;
         background-size: cover;
         background-repeat: no-repeat;
