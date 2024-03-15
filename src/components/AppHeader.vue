@@ -35,7 +35,7 @@ export default {
         </router-link>
 
         <div class="d-flex gap-3 ms_color-dark">
-          <router-link v-if="$route.path !== '/'" to="/" class="btn btn-warning fw-bold">
+          <router-link v-if="$route.path !== '/'" to="/" class="btn btn-warning fw-bold ms_go-back">
             Torna indietro
           </router-link>
 
@@ -71,6 +71,12 @@ export default {
 
 <style lang="scss" scoped>
 @use "../styles/variables/variables.scss" as *;
+
+@media screen and (max-width: 768px) {
+  .ms_go-back {
+    display: none;
+  }
+}
 
 .ms_border-color {
   border-color: $ms_dark !important;

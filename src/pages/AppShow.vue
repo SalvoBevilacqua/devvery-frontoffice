@@ -29,6 +29,12 @@ export default {
       });
   },
   methods: {
+    showModal() {
+      this.store.showModal = true;
+      setTimeout(() => {
+        this.store.showModal = false;
+      }, 1000);
+    },
     addtoCart(product) {
       this.store.nameOfProductSelected = "";
       this.store.nameOfProductSelected = product.name;
@@ -49,16 +55,10 @@ export default {
         this.store.showError = true;
       } else if (existingProduct) {
         existingProduct.quantity++;
-        this.store.showModal = true;
-        setTimeout(() => {
-          this.store.showModal = false;
-        }, 3200);
+        this.showModal();
       } else {
         this.store.cartData.push(myProduct);
-        this.store.showModal = true;
-        setTimeout(() => {
-          this.store.showModal = false;
-        }, 3200);
+        this.showModal()
       }
 
       localStorage.setItem("cartData", JSON.stringify(this.store.cartData));
@@ -73,10 +73,10 @@ export default {
 <template>
   <AppHeader />
 
-  <div v-if="!store.menuEmpty">
+  <div v-if="!store.menuEmpty" class="position-relative">
     <div class="container my-5">
       <!-- INFO RISTORANTE -->
-      <div class="ms_restaurant d-flex justify-content-center gap-3 mb-5 align-items-center">
+      <div class="ms_restaurant d-flex flex-column flex-sm-row justify-content-center gap-3 mb-5 align-items-center">
         <!-- IMMAGINE -->
         <img v-if="store.foodsFound[0].restaurant.cover_image"
           :src="`${store.baseUrl}/storage/${store.foodsFound[0].restaurant.cover_image}`"
@@ -132,22 +132,26 @@ export default {
     <!-- MODAL -->
     <transition class="text-center ms_modal-text" name="fade">
       <div v-if="store.showModal || store.showError" :class="store.showModal ? 'modal-correct' : 'modal-error'"
-        class="active d-flex modal align-items-center justify-content-center">
-        <div v-if="store.showModal" class="modal-content text-white p-5">
-          <p class="fs-5"><strong class="ms_color-yellow p-1 fs-4">{{ store.nameOfProductSelected }}</strong> aggiunto
-            al carrello!</p>
-        </div>
-        <div v-if="store.showError"
-          class="err-content text-center p-5 d-flex flex-row justify-content-center position-relative align-items-center">
+        class="d-flex modal align-items-center justify-content-center">
 
-          <button type="button" class="btn ms_btn-red position-absolute top-0 end-0" @click="close">
-            <i class="fa-solid fa-x"></i>
+        <div v-if="store.showModal" class="px-5 py-3 bg-white border border-3 rounded-4 border-black">
+          <p class="fs-5">
+            <strong class="ms_color-dark fs-4">{{ store.nameOfProductSelected }}</strong>
+            <br>
+            <span>aggiunto al carrello!</span>
+          </p>
+        </div>
+
+        <div v-if="store.showError"
+          class="position-absolute top-50 start-50 translate-middle bg-white border border-3 rounded-5 border-black">
+          <button type="button" class="btn fs-3 p-5" @click="close">
+            Non puoi ordinare da due ristoranti diversi!
           </button>
 
-          <p class="fs-3">Non puoi ordinare da due ristoranti diversi!</p>
         </div>
       </div>
     </transition>
+
   </div>
 
   <div v-else>
@@ -189,61 +193,30 @@ export default {
   }
 }
 
-/* Styling for the modal */
-.ms_modal-text {
-  @media screen and (min-width: 576px) {
-    width: 50% !important;
+@media screen and (max-width: 576px) {
+  .ms_restaurant {
+    padding: 1.5rem;
+    height: unset !important;
+    width: 100%;
   }
 }
 
+/* Styling for the modal */
 .modal-correct {
+  padding: 0 2rem;
   position: fixed;
   margin-top: 70vh;
   left: 50%;
   transform: translateX(-50%);
-  width: fit-content !important;
   display: none;
-  justify-content: center;
-  align-items: center;
   height: fit-content;
   z-index: 2;
 }
 
 .modal-error {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100% !important;
   display: none;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   z-index: 2;
   backdrop-filter: blur(5px);
-  padding: 10%;
-}
-
-.active {
-  display: flex;
-}
-
-.modal-content {
-  border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.9);
-}
-
-.err-content {
-  border-radius: 10px;
-  background-color: white;
-  color: $ms_dark;
-  border: 5px solid $ms_yellow;
-  font-weight: bolder;
-}
-
-.ms_btn-red {
-  background-color: rgba(255, 255, 255, 0);
-  color: $ms_dark;
-  border: 0;
 }
 
 /* Fade animation */
