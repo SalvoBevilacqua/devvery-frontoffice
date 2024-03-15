@@ -51,7 +51,8 @@ export default {
   <div class="wrapper">
     <div v-if="store.cartData.length > 0">
       <div class="text-center mt-3">
-        <p class="d-inline-block text-center rounded-2 fw-bold p-2 ms_restaurant_name">
+        <p
+          class="d-inline-block p-3 text-center border border-light-subtle border-2 rounded-4 fw-bold ms_color-dark bg-body-tertiary">
           Stai ordinando da {{ store.cartData[0].restaurant_name }}
         </p>
       </div>
@@ -85,7 +86,7 @@ export default {
 
       <div class="d-flex justify-content-end mt-5">
         <router-link v-if="store.cartData.length > 0" to="/shipment" class="text-end">
-          <button class="btn ms_btn-outline-dark fs-5 p-2" data-bs-dismiss="offcanvas" aria-label="Close">
+          <button class="btn border-0 fs-5 p-2 ms_color-dark fw-bold" data-bs-dismiss="offcanvas" aria-label="Close">
             Conferma ordine<i class="fa-solid fa-circle-chevron-right fs-3 ms-2 align-middle"></i>
           </button>
         </router-link>
@@ -103,22 +104,17 @@ export default {
 <style scoped lang="scss">
 @use "../styles/variables/variables.scss" as *;
 
-.ms_restaurant_name {
-  color: $ms_dark;
-  border: 2px solid $ms_yellow;
+p {
+  &:hover {
+    border-color: $ms_dark !important;
+  }
 }
 
-.ms_btn-outline-dark {
-  border: none;
-}
-
-.ms_ship {
-  background-color: white;
-
-}
-
-.ms_color_dark {
-  color: $ms_dark;
+.ms_color-dark {
+  &:hover {
+    color: $ms_yellow;
+    background-color: $ms_dark;
+  }
 }
 
 .info {
