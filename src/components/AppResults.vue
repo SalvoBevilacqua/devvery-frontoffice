@@ -49,7 +49,7 @@ export default {
 
             <!-- BADGE -->
             <div class="d-flex flex-wrap gap-1 my-2">
-              <span class="border rounded-2 px-1 border-0 ms_bg-yellow ms_color-dark fw-bold"
+              <span class="border rounded-2 px-1 border-0 ms_bg-yellow text-white fw-bold"
                 v-for="tipo in restaurant.types">
                 {{ tipo.name }}
               </span>
