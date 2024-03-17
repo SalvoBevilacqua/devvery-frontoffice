@@ -9,9 +9,10 @@ export default {
 <template>
   <div class="wrapper w-100 d-flex justify-content-center align-items-center text-center">
     <div class="success">
-      <img src="../assets/images/main/pittogramma.png" alt="" class="animatedImage" />
+      <router-link to="/">
+        <img src="../assets/images/main/pittogramma.png" alt="" class="animatedImage" />
+      </router-link>
       <h2 class="mt-5 mb-3">Ordine effettuato con successo!</h2>
-      <router-link to="/" class="btn btn-success">Torna alla Home</router-link>
     </div>
   </div>
 </template>
@@ -27,7 +28,7 @@ export default {
   }
 
   img {
-    height: 30vh;
+    height: 25%;
     animation: pulse 1s infinite alternate;
     transition: transform 0.3s ease-out;
   }
