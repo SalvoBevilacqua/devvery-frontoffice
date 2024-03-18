@@ -124,3 +124,14 @@ img {
   font-weight: bold;
   font-size: .7rem;
 }
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 6px;
+  background: $ms_dark;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $ms_yellow;
+  border-radius: 4px;
+}
