@@ -42,6 +42,11 @@ export default {
     emptyCart() {
       this.store.cartData = [];
       localStorage.clear();
+    },
+    goToSelectedRestaurant(slug) {
+      this.$router.push({ name: 'show', params: { slug: slug } }).then(() => {
+        this.$router.go(0);
+      });
     }
   },
 };
@@ -51,8 +56,8 @@ export default {
   <div class="wrapper">
     <div v-if="store.cartData.length > 0">
       <div class="text-center mt-3">
-        <p
-          class="d-inline-block p-3 text-center border border-light-subtle border-2 rounded-4 fw-bold ms_color-dark bg-body-tertiary">
+        <p class="d-inline-block p-3 text-center border border-light-subtle border-2 rounded-4 fw-bold ms_color-dark bg-body-tertiary go-to-restaurant"
+          @click="goToSelectedRestaurant(store.cartData[0].restaurant_slug)">
           Stai ordinando da {{ store.cartData[0].restaurant_name }}
         </p>
       </div>
@@ -108,6 +113,10 @@ p {
   &:hover {
     border-color: $ms_dark !important;
   }
+}
+
+.go-to-restaurant {
+  cursor: pointer;
 }
 
 .ms_color-dark {
